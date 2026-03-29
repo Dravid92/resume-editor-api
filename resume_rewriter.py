@@ -1,0 +1,1 @@
+# get the missing key words from nlp processor and rephrase the resume to include those key words and make it more relevant to the job description.
