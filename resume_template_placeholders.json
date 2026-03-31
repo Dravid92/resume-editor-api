@@ -1,0 +1,64 @@
+{
+  "company_name_title": { "max_words": 6 },
+
+  "first_name": { "max_words": 2 },
+  "last_name": { "max_words": 2 },
+  "job_tagline": { "max_words": 6 },
+
+  "email": { "max_words": 3 },
+  "phone": { "max_words": 3 },
+  "linkedin": { "max_words": 2 },
+  "github": { "max_words": 2 },
+  "location": { "max_words": 4 },
+
+  "summary": { "max_words": 80 },
+
+  "languages": { "max_words": 12 },
+  "frameworks": { "max_words": 12 },
+  "databases": { "max_words": 10 },
+  "cloud_infra": { "max_words": 10 },
+  "systems": { "max_words": 10 },
+  "practices": { "max_words": 10 },
+
+  "experience_title_1": { "max_words": 6 },
+  "experience_company_1": { "max_words": 6 },
+  "experience_date_1": { "max_words": 4 },
+  "experience_location_1": { "max_words": 4 },
+  "experience_1_bullets_1": { "max_words": 20 },
+  "experience_1_bullets_2": { "max_words": 20 },
+  "experience_1_bullets_3": { "max_words": 20 },
+  "experience_1_bullets_4": { "max_words": 20 },
+
+  "experience_title_2": { "max_words": 6 },
+  "experience_company_2": { "max_words": 6 },
+  "experience_date_2": { "max_words": 4 },
+  "experience_location_2": { "max_words": 4 },
+  "experience_2_bullets_1": { "max_words": 20 },
+  "experience_2_bullets_2": { "max_words": 20 },
+  "experience_2_bullets_3": { "max_words": 20 },
+  "experience_2_bullets_4": { "max_words": 20 },
+
+  "experience_title_3": { "max_words": 6 },
+  "experience_company_3": { "max_words": 6 },
+  "experience_date_3": { "max_words": 4 },
+  "experience_location_3": { "max_words": 4 },
+  "experience_3_bullets_1": { "max_words": 20 },
+  "experience_3_bullets_2": { "max_words": 20 },
+  "experience_3_bullets_3": { "max_words": 20 },
+  "experience_3_bullets_4": { "max_words": 20 },
+
+  "project_name_1": { "max_words": 5 },
+  "project_stack_1": { "max_words": 8 },
+  "project_link_1": { "max_words": 2 },
+  "project_description_1": { "max_words": 25 },
+
+  "project_name_2": { "max_words": 5 },
+  "project_stack_2": { "max_words": 8 },
+  "project_link_2": { "max_words": 2 },
+  "project_description_2": { "max_words": 25 },
+
+  "education_degree": { "max_words": 8 },
+  "education_school": { "max_words": 6 },
+  "education_date": { "max_words": 4 },
+  "education_gpa": { "max_words": 2 }
+}

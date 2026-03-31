@@ -1,3 +1,5 @@
+import json
+
 import requests
 
 class BaseLLM:
@@ -42,11 +44,16 @@ class LLMService:
 
     def suggest_resume_improvements(self, resume_text: str, job_description):
         prompt = PromptManager().load(
-            "resume_optimizer_prompt",
+            "resume_json_generator_prompt",
             {"resume_text": resume_text, "job_description":job_description}
         )
 
         raw = self.llm.generate(prompt)
+        try:
+            return json.loads(raw)
+        except json.JSONDecodeError:
+            print("Invalid JSON from LLM:", raw)
+            raise
         return raw
 
 class PromptManager:
