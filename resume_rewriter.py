@@ -1,5 +1,4 @@
-import json
-import re
+from jinja2 import Environment, FileSystemLoader
 from typing import Dict
 
 
@@ -12,31 +11,21 @@ class TemplateLoader:
             return file.read()
 
 
-class PlaceholderEngine:
-    PLACEHOLDER_PATTERN = r"\{\{(.*?)\}\}"
 
-    def __init__(self, template: str):
-        self.template = template
+class HTMLRenderer:
+    def __init__(self, template_path: str):
+        template_loader = FileSystemLoader(searchpath=template_path)
+        self.env = Environment(loader=template_loader, autoescape=True)
 
-    def extract_placeholders(self):
-        return set(re.findall(self.PLACEHOLDER_PATTERN, self.template))
+    def render(self, template_name: str, context: dict, output_path: str):
+        template = self.env.get_template("template.html")
 
-    def render(self, data: Dict[str, str]) -> str:
-        rendered = self.template
+        rendered_html = template.render(context)
 
-        placeholders = self.extract_placeholders()
+        with open(output_path, "w", encoding="utf-8") as f:
+            f.write(rendered_html)
 
-        for key in placeholders:
-            value = data.get(key, "")
-
-            # Ensure string conversion
-            if value is None:
-                value = ""
-
-            rendered = rendered.replace(f"{{{{{key}}}}}", str(value))
-
-        return rendered
-
+        return rendered_html
 
 class ResumeValidator:
     def __init__(self, required_fields=None):
@@ -54,13 +43,12 @@ class ResumeValidator:
 
 class ResumeRenderer:
     def __init__(self, template_path: str):
-        self.loader = TemplateLoader(template_path)
-        self.template = self.loader.load()
-        self.engine = PlaceholderEngine(self.template)
+        self.engine = HTMLRenderer(template_path)
 
     def render(self, json_data: Dict[str, str]) -> str:
-        return self.engine.render(json_data)
+        return self.engine.render(context=json_data, template_name="template", output_path="output/output.html")
 
     def save(self, output_path: str, content: str):
         with open(output_path, "w", encoding="utf-8") as file:
             file.write(content)
+        return file

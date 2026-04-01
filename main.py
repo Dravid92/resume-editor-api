@@ -10,14 +10,15 @@ from fastapi.responses import HTMLResponse
 
 from file_parser import FileParser, ParserFactory
 from job_scraper import JDExtractor, JDHTMLExtractor
+from llm_service import ResumeOrchestrator
+from lmstudio import LMStudioService
 
-from ollama import LLMService, OllamaLLM
 from resume_rewriter import ResumeRenderer
 
 app = FastAPI()
 UPLOAD_DIR = "uploads"
 PROCESSED_DIR = "generated"
-TEMPLATE_PATH = "template.html"
+TEMPLATE_PATH = "templates"
 
 app.add_middleware(
     CORSMiddleware,
@@ -54,13 +55,12 @@ async def process_upload_file(
     print("Resume parsed successfully")
     jd_html_soup = JDHTMLExtractor().extract(url=url)
     jd_text = JDExtractor().extract(soup=jd_html_soup)
-    print("JD extracted successfully")
+    print(f"JD extracted successfully {jd_text}")
     print("Passing details to LLM...")
-    llm = OllamaLLM(model="phi3:mini")
-    resume_suggestions = LLMService(llm=llm).suggest_resume_improvements(resume_text=details, job_description=jd_text)
+    llm = LMStudioService()
+    resume_suggestions = ResumeOrchestrator(llm=llm).generate(resume_text=details, jd_text=jd_text)
     print("Suggestions extracted successfully from LLM...")
     renderer = ResumeRenderer(TEMPLATE_PATH)
-
     final_html = renderer.render(resume_suggestions)
     # print(resume_suggestions)
     return HTMLResponse(content=final_html)

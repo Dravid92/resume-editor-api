@@ -49,11 +49,7 @@ class LLMService:
         )
 
         raw = self.llm.generate(prompt)
-        try:
-            return json.loads(raw)
-        except json.JSONDecodeError:
-            print("Invalid JSON from LLM:", raw)
-            raise
+
         return raw
 
 class PromptManager:
